@@ -25,6 +25,11 @@ void MainWindow::on_load_button_clicked()
                                                       "/home",
                                                       QFileDialog::ShowDirsOnly
                                                       | QFileDialog::DontResolveSymlinks);
+    QSplashScreen *splash=new QSplashScreen(this);
+    splash->setPixmap(QPixmap(":/images/1_hi7euM223Sr-9PIi1Pk7ng.png").scaled(632,322));
+
+    splash->show();
+    delay(50);
     if(dir_path!="")
         error=2; //dir loaded but doesn't have text files in it
     QDir dir(dir_path);
@@ -58,4 +63,12 @@ void MainWindow::on_load_button_clicked()
     ui->load_status->setFont(font_10);
     ui->load_status->setPalette(palette);
     ui->load_status->show();
+    splash->close();
 }
+void MainWindow::delay(float time)
+{
+    QTime dieTime= QTime::currentTime().addMSecs(time);
+    while (QTime::currentTime() < dieTime)
+        QCoreApplication::processEvents(QEventLoop::AllEvents,100);
+}
+

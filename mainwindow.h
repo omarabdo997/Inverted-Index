@@ -6,6 +6,8 @@
 #include <QDirIterator>
 #include <QDebug>
 #include <QPalette>
+#include <QSplashScreen>
+#include <QTime>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -24,5 +26,6 @@ private slots:
 
 private:
     Ui::MainWindow *ui;
+    void delay(float time);
 };
 #endif // MAINWINDOW_H
