@@ -29,7 +29,7 @@ void MainWindow::on_load_button_clicked()
                                                       | QFileDialog::DontResolveSymlinks);
     QSplashScreen *splash=new QSplashScreen(this);
     splash->setPixmap(QPixmap(":/images/1_hi7euM223Sr-9PIi1Pk7ng.png").scaled(632,322));
-
+    ui->statusbar->showMessage("Building inverted index.....",50);
     splash->show();
     delay(10);
     if(dir_path!="")
@@ -44,6 +44,7 @@ void MainWindow::on_load_button_clicked()
         {
             error=0;
             qDebug()<<file.filePath();
+            //todo insert file.filePath() here to the parsing function
         }
     }
     if(error==1)
@@ -79,20 +80,30 @@ void MainWindow::bold(QString &data, QString word)
     QString current_word="";
     for(int i=0;i<data.length();i++)
     {
-        if(data[i]==" ")
+        if(data[i].isLetterOrNumber())
+        {
+            current_word+=data[i];
+        }
+        else
         {
             if(current_word.toLower()==word.toLower())
             {
                 data.insert(i,"</b>");
                 data.insert(i-word.length(),"<b>");
                 i+=7;
-                current_word="";
+
             }
+            current_word="";
         }
-        else
-        {
-            current_word+=data[i];
-        }
+
+
+    }
+    if(word.toLower()!="" and current_word.toLower()==word.toLower())
+    {
+
+        data.insert(data.length()-1-word.length(),"<b>");
+        data.push_back("</b>");
+
     }
 }
 
@@ -100,6 +111,7 @@ void MainWindow::bold(QString &data, QString word)
 void MainWindow::on_search_button_clicked()
 {
     ui->documents_list->clear();
+    //search for the document ids here using ui->search_field->text()
     for(int i=0;i<10;i++)
     {
         ui->documents_list->addItem(QString::number(i)+".txt");
