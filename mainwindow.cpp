@@ -62,6 +62,7 @@ void MainWindow::on_load_button_clicked()
     {
         ui->load_status->setText("Directory Loaded Successfully!");
         palette.setColor(QPalette::WindowText,Qt::blue);
+        ui->statusbar->showMessage("Done",3000);
     }
     ui->load_status->setFont(font_10);
     ui->load_status->setPalette(palette);
@@ -110,6 +111,21 @@ void MainWindow::bold(QString &data, QString word)
 
 void MainWindow::on_search_button_clicked()
 {
+
+    QString searched_word=ui->search_field->text();
+    if(searched_word=="" or searched_word==searched)
+    {
+        return;
+    }
+    for(int i=0;i<searched_word.size();i++)
+    {
+        if (not searched_word[i].isLetterOrNumber())
+        {
+            QMessageBox::information(this,"Search error","You can only search for word with letters and numbers!");
+            return;
+        }
+    }
+    ui->document_data->clear();
     ui->documents_list->clear();
     //search for the document ids here using ui->search_field->text()
     for(int i=0;i<10;i++)
