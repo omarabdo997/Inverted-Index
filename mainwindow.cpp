@@ -8,6 +8,8 @@ MainWindow::MainWindow(QWidget *parent)
     ui->setupUi(this);
     ui->load_status->hide();
     ui->load_status->setAutoFillBackground(true);
+    ui->documents_list->setFont(QFont("times",12));
+    ui->document_data->setFont(QFont("times",12));
 }
 
 MainWindow::~MainWindow()
@@ -21,7 +23,7 @@ void MainWindow::on_load_button_clicked()
     QFont font_10("times",10);
     QPalette palette;
     int error=1; //nothing loaded
-    QString dir_path = QFileDialog::getExistingDirectory(this, tr("Open Directory"),
+    dir_path = QFileDialog::getExistingDirectory(this, tr("Open Directory"),
                                                       "/home",
                                                       QFileDialog::ShowDirsOnly
                                                       | QFileDialog::DontResolveSymlinks);
@@ -29,7 +31,7 @@ void MainWindow::on_load_button_clicked()
     splash->setPixmap(QPixmap(":/images/1_hi7euM223Sr-9PIi1Pk7ng.png").scaled(632,322));
 
     splash->show();
-    delay(50);
+    delay(10);
     if(dir_path!="")
         error=2; //dir loaded but doesn't have text files in it
     QDir dir(dir_path);
@@ -72,3 +74,23 @@ void MainWindow::delay(float time)
         QCoreApplication::processEvents(QEventLoop::AllEvents,100);
 }
 
+
+void MainWindow::on_search_button_clicked()
+{
+    for(int i=0;i<10;i++)
+    {
+        ui->documents_list->addItem(QString::number(i)+".txt");
+    }
+}
+
+void MainWindow::on_documents_list_itemDoubleClicked(QListWidgetItem *item)
+{
+    QString file_name=item->text();
+    qDebug()<<dir_path+file_name;
+    QFile file(dir_path+"/"+file_name);
+    file.open(QIODevice::ReadOnly | QIODevice::Text);
+    QTextStream fileStream(&file);
+    QString data=fileStream.readAll();
+    ui->document_data->setText(data);
+    file.close();
+}

@@ -8,6 +8,7 @@
 #include <QPalette>
 #include <QSplashScreen>
 #include <QTime>
+#include <QListWidgetItem>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -24,8 +25,13 @@ public:
 private slots:
     void on_load_button_clicked();
 
+    void on_search_button_clicked();
+
+    void on_documents_list_itemDoubleClicked(QListWidgetItem *item);
+
 private:
     Ui::MainWindow *ui;
     void delay(float time);
+    QString dir_path;
 };
 #endif // MAINWINDOW_H
