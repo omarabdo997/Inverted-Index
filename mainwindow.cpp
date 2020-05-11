@@ -74,23 +74,47 @@ void MainWindow::delay(float time)
         QCoreApplication::processEvents(QEventLoop::AllEvents,100);
 }
 
+void MainWindow::bold(QString &data, QString word)
+{
+    QString current_word="";
+    for(int i=0;i<data.length();i++)
+    {
+        if(data[i]==" ")
+        {
+            if(current_word.toLower()==word.toLower())
+            {
+                data.insert(i,"</b>");
+                data.insert(i-word.length(),"<b>");
+                i+=7;
+                current_word="";
+            }
+        }
+        else
+        {
+            current_word+=data[i];
+        }
+    }
+}
+
 
 void MainWindow::on_search_button_clicked()
 {
+    ui->documents_list->clear();
     for(int i=0;i<10;i++)
     {
         ui->documents_list->addItem(QString::number(i)+".txt");
     }
+    searched=ui->search_field->text();
 }
 
 void MainWindow::on_documents_list_itemDoubleClicked(QListWidgetItem *item)
 {
     QString file_name=item->text();
-    qDebug()<<dir_path+file_name;
     QFile file(dir_path+"/"+file_name);
     file.open(QIODevice::ReadOnly | QIODevice::Text);
     QTextStream fileStream(&file);
     QString data=fileStream.readAll();
+    bold(data,searched);
     ui->document_data->setText(data);
     file.close();
 }

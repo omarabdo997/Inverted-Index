@@ -33,5 +33,7 @@ private:
     Ui::MainWindow *ui;
     void delay(float time);
     QString dir_path;
+    void bold(QString &data,QString word);
+    QString searched;
 };
 #endif // MAINWINDOW_H
