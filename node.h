@@ -19,6 +19,8 @@ public:
     void paintBlack();
     void addDocument(QString document);
     bool isNew(QString document);
+    Node *uncle();
+    Node *grandParent();
 };
 
 #endif // NODE_H

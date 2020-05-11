@@ -41,3 +41,16 @@ bool Node::isNew(QString document)
 
     }
 }
+
+Node *Node::uncle()
+{
+    if(this == parent->left)
+        return parent->right;
+    else
+        return parent->left;
+}
+
+Node *Node::grandParent()
+{
+    return parent->parent;
+}
