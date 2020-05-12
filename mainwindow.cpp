@@ -20,6 +20,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_load_button_clicked()
 {
+    tree=BalancedBinaryTree();
     QFont font_10("times",10);
     QPalette palette;
     int error=1; //nothing loaded
@@ -43,8 +44,7 @@ void MainWindow::on_load_button_clicked()
         if(file.suffix()=="txt")
         {
             error=0;
-            qDebug()<<file.filePath();
-            //todo insert file.filePath() here to the parsing function
+            build_inverted_index(file);
         }
     }
     if(error==1)
@@ -108,6 +108,32 @@ void MainWindow::bold(QString &data, QString word)
     }
 }
 
+void MainWindow::build_inverted_index(QFileInfo file_info)
+{
+    QFile file(file_info.filePath());
+    file.open(QIODevice::ReadOnly | QIODevice::Text);
+    QTextStream fileStream(&file);
+    QString data=fileStream.readAll();
+    QString current_word="";
+    for(int i=0;i<data.length();i++)
+    {
+        if(data[i].isLetterOrNumber())
+        {
+            current_word+=data[i];
+        }
+        else
+        {
+            tree.insert(current_word.toLower(),file_info.baseName());
+            current_word="";
+        }
+    }
+    if(current_word!="")
+    {
+        tree.insert(current_word.toLower(),file_info.baseName());
+    }
+    file.close();
+}
+
 
 void MainWindow::on_search_button_clicked()
 {
@@ -127,10 +153,10 @@ void MainWindow::on_search_button_clicked()
     }
     ui->document_data->clear();
     ui->documents_list->clear();
-    //search for the document ids here using ui->search_field->text()
-    for(int i=0;i<10;i++)
+    QVector<QString>file_names=tree.get(searched_word);
+    for(int i=0;i<file_names.size();i++)
     {
-        ui->documents_list->addItem(QString::number(i)+".txt");
+        ui->documents_list->addItem(file_names[i]+".txt");
     }
     searched=ui->search_field->text();
 }

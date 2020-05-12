@@ -10,6 +10,7 @@
 #include <QTime>
 #include <QListWidgetItem>
 #include <QMessageBox>
+#include <balancedbinarytree.h>
 
 QT_BEGIN_NAMESPACE
 namespace Ui { class MainWindow; }
@@ -36,5 +37,8 @@ private:
     QString dir_path;
     void bold(QString &data,QString word);
     QString searched;
+    void build_inverted_index(QFileInfo file_info);
+    BalancedBinaryTree tree;
+
 };
 #endif // MAINWINDOW_H
