@@ -5,12 +5,6 @@ Node::Node()
 
 }
 
-Node::~Node()
-{
-delete parent;
-delete left;
-delete right;
-}
 
 Node::Node(Node *parent, QString key)
 {
