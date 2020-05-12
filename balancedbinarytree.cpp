@@ -1,8 +1,13 @@
 #include "balancedbinarytree.h"
 
-void BalancedBinaryTree::standardInsert(QString word, QString document)
+BalancedBinaryTree::BalancedBinaryTree()
 {
-    if(root == nullptr)
+
+}
+
+void BalancedBinaryTree::insert(QString word, QString document)
+{
+    standardIn    if(root == nullptr)
     {
         root = new Node(nullptr, word);
         root->addDocument(document);
@@ -36,19 +41,13 @@ void BalancedBinaryTree::standardInsert(QString word, QString document)
     if(parentPointer->key < word)
        parentPointer->right = pointer;
     else
-       parentPointer->left =pointer;
+       parentPointer->left =pointer;sert(word, document);
 }
 
-BalancedBinaryTree::BalancedBinaryTree()
+BalancedBinaryTree::~BalancedBinaryTree()
 {
-
+  delete this->root;
 }
-
-void BalancedBinaryTree::insert(QString word, QString document)
-{
-    standardInsert(word, document);
-}
-
 QVector<QString> BalancedBinaryTree::get(QString word)
 {
     Node* pointer = root;
