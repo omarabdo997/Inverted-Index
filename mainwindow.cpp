@@ -10,6 +10,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->load_status->setAutoFillBackground(true);
     ui->documents_list->setFont(QFont("times",12));
     ui->document_data->setFont(QFont("times",12));
+
 }
 
 MainWindow::~MainWindow()
@@ -62,6 +63,7 @@ void MainWindow::on_load_button_clicked()
     {
         ui->load_status->setText("Directory Loaded Successfully!");
         palette.setColor(QPalette::WindowText,Qt::blue);
+        ui->load_button->setEnabled(false);
         ui->statusbar->showMessage("Done",3000);
     }
     ui->load_status->setFont(font_10);
@@ -171,4 +173,20 @@ void MainWindow::on_documents_list_itemDoubleClicked(QListWidgetItem *item)
     bold(data,searched);
     ui->document_data->setText(data);
     file.close();
+}
+
+void MainWindow::on_actionNew_triggered()
+{
+    tree=BalancedBinaryTree();
+    ui->documents_list->clear();
+    ui->document_data->clear();
+    ui->load_status->setHidden(true);
+    ui->load_button->setEnabled(true);
+    searched="";
+    ui->search_field->clear();
+}
+
+void MainWindow::on_actionExit_triggered()
+{
+    close();
 }
