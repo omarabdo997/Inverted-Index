@@ -43,10 +43,17 @@ void BalancedBinaryTree::insert(QString word, QString document)
     else
        parentPointer->left =pointer;sert(word, document);
 }
+void deleteTree( Node *root)
+{
+    if(root==nullptr)return;
+    deleteTree(root->left);
+    deleteTree(root->right);
+    delete root;
+}
 
 BalancedBinaryTree::~BalancedBinaryTree()
 {
-  delete this->root;
+  deleteTree(this->root);
 }
 QVector<QString> BalancedBinaryTree::get(QString word)
 {
