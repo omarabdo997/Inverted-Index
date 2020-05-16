@@ -12,6 +12,18 @@ Node::Node(Node *parent, QString key)
     this->key = key;
 }
 
+/*void Node::paintRed()
+{
+    this->isRed = 1;
+}*/
+
+/*
+void Node::paintBlack()
+{
+  this->isRed=0;
+ }
+*/
+
 void Node::addDocument(QString document)
 {
     documents.push_back(document);
@@ -32,4 +44,18 @@ bool Node::isNew(QString document)
 
     }
 }
-
+/*
+Node *Node::uncle()
+{
+    if(this == parent->left)
+        return parent->right;
+    else
+        return parent->left;
+}
+*/
+/*
+    Node *Node::grandParent()
+{
+    return parent->parent;
+}
+*/

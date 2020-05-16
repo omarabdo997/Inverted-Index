@@ -7,6 +7,7 @@ class BalancedBinaryTree
 {
 private:
     Node *root = nullptr;
+    void standardInsert(QString word, QString document);
 public:
     BalancedBinaryTree();
     ~BalancedBinaryTree();

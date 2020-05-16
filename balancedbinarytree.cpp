@@ -7,11 +7,10 @@ BalancedBinaryTree::BalancedBinaryTree()
 
 void BalancedBinaryTree::insert(QString word, QString document)
 {
-     if(root == nullptr)
+       if(root == nullptr)
     {
         root = new Node(nullptr, word);
         root->addDocument(document);
-        root->paintRed();
         return;
     }
     Node *pointer = root;
@@ -37,7 +36,6 @@ void BalancedBinaryTree::insert(QString word, QString document)
     }
     pointer = new Node(parentPointer, word);
     pointer->addDocument(document);
-    pointer->paintRed();
     if(parentPointer->key < word)
        parentPointer->right = pointer;
     else
