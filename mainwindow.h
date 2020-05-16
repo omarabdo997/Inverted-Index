@@ -31,6 +31,10 @@ private slots:
 
     void on_documents_list_itemDoubleClicked(QListWidgetItem *item);
 
+    void on_actionNew_triggered();
+
+    void on_actionExit_triggered();
+
 private:
     Ui::MainWindow *ui;
     void delay(float time);

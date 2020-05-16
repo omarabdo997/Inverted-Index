@@ -6,10 +6,12 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    setWindowTitle("Inverted Index");
     ui->load_status->hide();
     ui->load_status->setAutoFillBackground(true);
     ui->documents_list->setFont(QFont("times",12));
     ui->document_data->setFont(QFont("times",12));
+
 }
 
 MainWindow::~MainWindow()
@@ -62,6 +64,7 @@ void MainWindow::on_load_button_clicked()
     {
         ui->load_status->setText("Directory Loaded Successfully!");
         palette.setColor(QPalette::WindowText,Qt::blue);
+        ui->load_button->setEnabled(false);
         ui->statusbar->showMessage("Done",3000);
     }
     ui->load_status->setFont(font_10);
@@ -154,6 +157,7 @@ void MainWindow::on_search_button_clicked()
     ui->document_data->clear();
     ui->documents_list->clear();
     QVector<QString>file_names=tree.get(searched_word);
+    QMessageBox::information(this,"Found","Found "+QString::number(file_names.size())+" files with the searched word "+searched_word);
     for(int i=0;i<file_names.size();i++)
     {
         ui->documents_list->addItem(file_names[i]+".txt");
@@ -171,4 +175,20 @@ void MainWindow::on_documents_list_itemDoubleClicked(QListWidgetItem *item)
     bold(data,searched);
     ui->document_data->setText(data);
     file.close();
+}
+
+void MainWindow::on_actionNew_triggered()
+{
+    tree=BalancedBinaryTree();
+    ui->documents_list->clear();
+    ui->document_data->clear();
+    ui->load_status->setHidden(true);
+    ui->load_button->setEnabled(true);
+    searched="";
+    ui->search_field->clear();
+}
+
+void MainWindow::on_actionExit_triggered()
+{
+    close();
 }
