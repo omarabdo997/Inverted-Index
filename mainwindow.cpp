@@ -156,6 +156,7 @@ void MainWindow::on_search_button_clicked()
     ui->document_data->clear();
     ui->documents_list->clear();
     QVector<QString>file_names=tree.get(searched_word);
+    QMessageBox::information(this,"Found","Found "+QString::number(file_names.size())+" files with the searched word "+searched_word);
     for(int i=0;i<file_names.size();i++)
     {
         ui->documents_list->addItem(file_names[i]+".txt");
