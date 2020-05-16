@@ -11,6 +11,7 @@ MainWindow::MainWindow(QWidget *parent)
     ui->load_status->setAutoFillBackground(true);
     ui->documents_list->setFont(QFont("times",12));
     ui->document_data->setFont(QFont("times",12));
+    tree=BalancedBinaryTree();
 
 }
 
@@ -22,6 +23,7 @@ MainWindow::~MainWindow()
 
 void MainWindow::on_load_button_clicked()
 {
+    tree.~BalancedBinaryTree();
     tree=BalancedBinaryTree();
     QFont font_10("times",10);
     QPalette palette;
@@ -179,6 +181,7 @@ void MainWindow::on_documents_list_itemDoubleClicked(QListWidgetItem *item)
 
 void MainWindow::on_actionNew_triggered()
 {
+    tree.~BalancedBinaryTree();
     tree=BalancedBinaryTree();
     ui->documents_list->clear();
     ui->document_data->clear();
