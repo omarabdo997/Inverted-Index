@@ -6,6 +6,7 @@ MainWindow::MainWindow(QWidget *parent)
     , ui(new Ui::MainWindow)
 {
     ui->setupUi(this);
+    setWindowTitle("Inverted Index");
     ui->load_status->hide();
     ui->load_status->setAutoFillBackground(true);
     ui->documents_list->setFont(QFont("times",12));
