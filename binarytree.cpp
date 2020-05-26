@@ -1,11 +1,11 @@
-#include "balancedbinarytree.h"
+#include "binarytree.h"
 
-BalancedBinaryTree::BalancedBinaryTree()
+BinaryTree::BinaryTree()
 {
 
 }
 
-void BalancedBinaryTree::insert(QString word, QString document)
+void BinaryTree::insert(QString word, QString document)
 {
        if(root == nullptr)
     {
@@ -49,11 +49,11 @@ void deleteTree( Node *root)
     delete root;
 }
 
-BalancedBinaryTree::~BalancedBinaryTree()
+BinaryTree::~BinaryTree()
 {
   deleteTree(this->root);
 }
-QVector<QString> BalancedBinaryTree::get(QString word)
+QVector<QString> BinaryTree::get(QString word)
 {
     Node* pointer = root;
     while(pointer != nullptr)
